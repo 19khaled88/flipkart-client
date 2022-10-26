@@ -4,7 +4,7 @@ import '../../App.css'
 
 const Home = () => {
   return (
-    <div className="jumbotron">
+    <div className="jumbotron" style={{paddingTop: '50px', marginTop: '80px'}}>
       <header className="container">
        <h1>Home Page</h1>
       </header>

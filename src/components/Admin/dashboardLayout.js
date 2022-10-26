@@ -23,7 +23,10 @@ const DashboardLayout = (props) => {
             </li>
           </ul>
         </Col>
-        <Col md={10} style={{ marginLeft: 'auto' }}>
+        <Col
+          md={10}
+          style={{ marginLeft: 'auto', paddingTop: '30px', marginTop: '20px' }}
+        >
           {props.children}
         </Col>
       </Row>

@@ -1,24 +1,26 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, Navigate,useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { isUserLoggedIn, logout } from '../../actions/auth.actions'
 import Search from './search'
 
 const Navbar = () => {
   const dispatch = useDispatch()
-  const auth = useSelector(state => state.auth)
+  const auth = useSelector((state) => state.auth)
   const navigate = useNavigate()
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(isUserLoggedIn())
-  },[])
+  }, [])
 
-  const logoutHandler=()=>{
+  const logoutHandler = () => {
     dispatch(logout())
-   navigate("/home")
-    
+    navigate('/home')
   }
   return (
-    <nav className="navbar navbar-expand-lg bg-light" style={{'zIndex': 1}}>
+    <nav
+      className="navbar fixed-top navbar-expand-lg bg-light"
+      style={{ zIndex: 1 }}
+    >
       <div className="container-fluid">
         <Link className="text-decoration-none" to="/">
           Dashboard
@@ -53,12 +55,13 @@ const Navbar = () => {
                 {auth.authenticate ? 'Logout' : 'Login/Register'}
               </a>
               <ul className="dropdown-menu">
-                {
-                  auth.authenticate ? 
+                {auth.authenticate ? (
                   <li>
-                  <span className="dropdown-item" onClick={logoutHandler}>Logout</span>
-                </li>
-                :
+                    <span className="dropdown-item" onClick={logoutHandler}>
+                      Logout
+                    </span>
+                  </li>
+                ) : (
                   <>
                     <li>
                       <Link className="dropdown-item" to="/signin">
@@ -71,8 +74,7 @@ const Navbar = () => {
                       </Link>
                     </li>
                   </>
-                }
-               
+                )}
 
                 <li>
                   <hr className="dropdown-divider" />
@@ -82,11 +84,8 @@ const Navbar = () => {
                     User
                   </a>
                 </li>
-
               </ul>
             </li>
-          
-
           </ul>
           <Search />
         </div>

@@ -1,5 +1,5 @@
 import axiosBaseUrl from '../utility/url'
-import { productConstants } from './constants'
+import { productConstants, productDetailsConstants } from './constants'
 
 export const addProduct = (formData, headers) => {
   return async (dispatch) => {
@@ -33,6 +33,28 @@ export const getProduct = () => {
     }
     if (response.status === 400) {
       dispatch({ type: productConstants.GET_PRODUCT_FAILURE })
+    }
+  }
+}
+
+export const showProductDetails=()=>{
+  return async (dispatch)=>{
+    dispatch({type:productDetailsConstants.SHOW_PRODUCT_DETAILS_REQUEST})
+    const response = await axiosBaseUrl.get('/product/details')
+    if(response.status ===200){
+      const {data} = response
+     
+      dispatch({
+        type:productDetailsConstants.SHOW_PRODUCT_DETAILS_SUCCESS,
+        payload:data
+      })
+    }
+    if(response.status === 400){
+      const {message} = response.data
+      dispatch({
+        type:productDetailsConstants.SHOW_PRODUCT_DETAILS_FAILURE,
+        payload:'Product Details not found'
+      })
     }
   }
 }

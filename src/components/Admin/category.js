@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
-import Modal from 'react-bootstrap/Modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { createCategory, getAllCategory } from '../../actions/category.actions'
+import NewModal from '../Modal'
 import DashboardLayout from './dashboardLayout'
 
 const Category = (props) => {
@@ -118,7 +118,7 @@ const Category = (props) => {
 
   return (
     <DashboardLayout>
-      <Container style={{ width: '90%' }}>
+      <Container style={{ width: '98%' }}>
         <Row className="pt-3">
           <Col md={12}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -140,7 +140,7 @@ const Category = (props) => {
         </Row>
       </Container>
 
-      <Modal show={show} onHide={handleClose}>
+      {/* <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add Category</Modal.Title>
         </Modal.Header>
@@ -176,7 +176,39 @@ const Category = (props) => {
             </Button>
           </Modal.Footer>
         </form>
-      </Modal>
+      </Modal> */}
+
+      <NewModal
+        title="Add Category"
+        show={show}
+        handleClose={handleClose}
+        handleCreate={handleSubmit}
+        button="Save Category"
+      >
+        <input
+          className="form-control mt-1 mb-1"
+          value={categoryName}
+          placeholder={'Category Name'}
+          onChange={(e) => setCategoryName(e.target.value)}
+        />
+        <select
+          className="form-control mt-1 mb-1"
+          onChange={(e) => setParentCategoryId(e.target.value)}
+        >
+          <option>Select category</option>
+          {createCategoryList(category).map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.name}
+            </option>
+          ))}
+        </select>
+        <input
+          className="form-control mt-1 mb-1"
+          type="file"
+          name="categoryImage"
+          onChange={handleCateImage}
+        />
+      </NewModal>
     </DashboardLayout>
   )
 }
