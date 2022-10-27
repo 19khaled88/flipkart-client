@@ -133,7 +133,6 @@ const Product = (props) => {
     let array = []
     if (productList !== undefined) {
       productList.forEach((element, index) => {
-        console.log(element)
         array.push(
           <tr key={index} onClick={() => showDetails(element._id)}>
             <td>{parseInt(index) + 1}</td>
@@ -197,6 +196,7 @@ const Product = (props) => {
                     <div className="productImgContainer">
                       <img
                         src={`http://localhost:8000/public/${picture.img}`}
+                        alt={`http://localhost:8000/public/${picture.img}`}
                       />
                     </div>
                   ))}
